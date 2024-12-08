@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dream Journal</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav>
+        <a href="{{ url_for('home') }}" class="{% if page == 'home' %}active{% endif %}">Home</a>
+        <a href="{{ url_for('login') }}" class="{% if page == 'login' %}active{% endif %}">Login</a>
+        <a href="{{ url_for('register') }}" class="{% if page == 'register' %}active{% endif %}">Register</a>
+        {% if current_user.is_authenticated %}
+        <a href="{{ url_for('logout') }}">Logout</a>
+        {% endif %}
+    </nav>
+
+    <!-- Flash Messages -->
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
+
+    <!-- Main Content -->
+    <main>
+        {% if page == 'home' %}
+        <section id="home">
+            <h1>Welcome, {{ current_user.username }}!</h1>
+            <h2>Your Dream Journal</h2>
+
+            <details>
+                <summary>Add New Entry</summary>
+                <form id="add-entry-form" method="POST" action="{{ url_for('add_entry') }}">
+                    <h3>Add New Entry</h3>
+                    <label for="title">Title:</label>
+                    <input id="title" type="text" name="title" required>
+                    <label for="date">Date:</label>
+                    <input id="date" type="date" name="date" required>
+                    <label for="sleep_duration">Sleep Duration:</label>
+                    <input id="sleep_duration" type="text" name="sleep_duration" required>
+                    <label for="content">Content:</label>
+                    <textarea id="content" name="content" required></textarea>
+                    <button type="submit">Add Entry</button>
+                </form>
+            </details>
+            <ul class="entry-list">
+                {% for entry in entries %}
+                <li>
+                    <h3>{{ entry.title }}</h3>
+                    <p><strong>Date:</strong> {{ entry.date }}</p>
+                    <p>{{ entry.content }}</p>
+                </li>
+                {% endfor %}
+            </ul>
+        </section>
+        {% elif page == 'login' %}
+        <section id="login">
+            <h2>Login</h2>
+            <form method="POST" action="{{ url_for('login') }}">
+                <label for="username">Username:</label>
+                <input id="username" type="text" name="username" required>
+                <label for="password">Password:</label>
+                <input id="password" type="password" name="password" required>
+                <button type="submit">Login</button>
+            </form>
+        </section>
+        {% elif page == 'register' %}
+        <section id="register">
+            <h2>Register</h2>
+            <form method="POST" action="{{ url_for('register') }}">
+                <label for="username">Username:</label>
+                <input id="username" type="text" name="username" required>
+                <label for="password">Password:</label>
+                <input id="password" type="password" name="password" required>
+                <button type="submit">Register</button>
+            </form>
+        </section>
+        {% endif %}
+    </main>
+</body>
+</html>

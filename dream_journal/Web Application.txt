@@ -1,0 +1,28 @@
+Web Application-夢境日誌
+夢境日誌介紹:用於記錄自己的夢境。能夠註冊和登入到自己專屬的夢境日誌，成功登入後，在首頁有夢境列表，對於每日的夢境標題、時間一目瞭然，在首頁也能操作登出或是新增夢境日誌。再新增夢境日誌時，也能記錄標題、作夢日期、睡眠時間和夢境內容。
+
+Prompt1 
+我想用 python flask 的套件, 寫一個夢境日誌. 前端希望透過 flask 裡面的 templates 來呈現。每篇文章都需要標題、日期、睡眠區間、夢境內容等欄位。請給予範例程式
+
+Prompt2
+請用前述的程式碼，利用alchemy sql 套件，將日誌存入資料庫，並用restful API 的格式，產生四隻APIs 包括文章的create、read、update、delete
+
+Prompt3
+請提供前端頁面包含下列頁面功能： 1. 顯示日誌的列表並有新增日誌的按鈕。當使用者按下新增日誌的按鈕，跳到下一個頁面 2. 新增撰寫日誌頁面 3. 在查看單篇文章的時候，頁面下方有三個按鈕，一個是回到文章列表、一個是編輯文章，一個是刪除文章。當編輯文章按鈕被點擊時，會帶到下一個頁面 4. 編輯頁面。會自動帶出文章內容。這個頁面也會有一個儲存的按鈕
+
+Prompt4
+我想再新增使用者註冊功能。使用者必須登入，才能新增或編輯自己創建的文章。
+
+Prompt5
+sqlalchemy.exc.IntegrityError: (sqlite3.IntegrityError) UNIQUE constraint failed: user.username [SQL: INSERT INTO user (username, password) VALUES (?, ?)] [parameters: ('123', 'sha256$lRsuFbhw898zYo8O$312c09ca7d0299d98a40ac35ce8c9ba302a4dea9fc6f1eee821f4f58e2bbc724')] (Background on this error at: https://sqlalche.me/e/20/gkpj) 跳出錯誤訊息了
+
+Prompt6
+sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) no such column: dream_entry.user_id [SQL: SELECT dream_entry.id AS dream_entry_id, dream_entry.title AS dream_entry_title, dream_entry.date AS dream_entry_date, dream_entry.sleep_duration AS dream_entry_sleep_duration, dream_entry.content AS dream_entry_content, dream_entry.user_id AS dream_entry_user_id FROM dream_entry WHERE dream_entry.user_id = ?] [parameters: (2,)] (Background on this error at: https://sqlalche.me/e/20/e3q8) 解決錯誤
+
+執行程式:使用app.py，因此直接執行檔案即可。
+
+對話連結: https://chatgpt.com/share/6720d6b0-e62c-800f-8a58-4e9cedc14ca9
+
+
+B111090080四資管三0黃?琁
+
